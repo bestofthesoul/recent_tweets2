@@ -1,0 +1,19 @@
+<div class="container">
+<h2>Whoever's tweets</h2>
+
+<form action="/" method='post'>
+  <label>Username</label>
+  <input name='username'>
+  <input type="submit" value="Submit">
+</form>
+
+
+<% if @tweets%>
+    <h2><%= @twitter_user.username%>'s tweets:</h2>
+    <ul>
+      <% @tweets.each do |tweet| %>
+        <li><%= tweet.text %></li>
+      <%end%>
+    </ul>
+  </div>
+<%end%>
