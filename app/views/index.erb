@@ -1,19 +1,49 @@
-<div class="container">
-<h2>Whoever's tweets</h2>
-
-<form action="/" method='post'>
-  <label>Username</label>
-  <input name='username'>
-  <input type="submit" value="Submit">
-</form>
 
 
-<% if @tweets%>
-    <h2><%= @twitter_user.username%>'s tweets:</h2>
-    <ul>
-      <% @tweets.each do |tweet| %>
-        <li><%= tweet.text %></li>
-      <%end%>
-    </ul>
+<h3>Welcome to Tweets(AJAX) </h3>
+  <form action="/username" method='post' id = "getusertweets">
+    <label>Username</label>
+    <input type = "text" name="username">
+    <input type="submit" value="Get User Tweets!">
+  </form>
+
+  <div id="ajax_loader" style="display:none;">
+    <img src="/images/ajax-loader.gif"><br>
+    <p>Loading..</p>
   </div>
-<%end%>
+
+
+
+<!-- BELOW CAN WORK BUT ITS MORE THAN REQUIRED, BECAUSE I HAVE TWEET SHOW ERB TO PUT NEW TWEETS -->
+<!-- 
+  <div id="tweets2">
+
+  </div>
+
+<script>
+$(document).ready(function() {
+  $('#getusertweets').submit(function(e){
+    
+    var tweetss = $("#getusertweets").serialize();
+    e.preventDefault();
+    $('#ajax_loader').show();
+
+    $.ajax({
+        type: "POST",
+        url: "/username",
+        data: tweetss,
+        success: function(response){
+          // alert("success");
+          $('#tweets2').html(response);
+        },
+        error: function(){
+          alert("Error");
+        },
+        complete: function(){
+          $('#ajax_loader').hide();
+        }
+    });
+
+  });
+});
+</script> -->

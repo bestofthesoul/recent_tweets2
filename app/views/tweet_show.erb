@@ -1,0 +1,50 @@
+<div class = "container">
+
+  <form id="new_tweet">
+    <label>New Tweet</label>
+    <input type = "text" name="username" placeholder ="your username">
+    <input type="text" name="newtweet" placeholder ="new tweet here">
+    <input id="newtweetbutton" type="submit" value="Submit">
+  </form>
+
+  <div id="ajax_loader" style="display:none;">
+    <img src="/images/ajax-loader.gif"><br>
+    Loading...
+  </div>
+
+  <div id="tweets">
+    <%= erb :"_tweet_box" %>
+  </div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+  $('#new_tweet').submit(function(e){
+    
+    var tweet = $("#new_tweet").serialize();
+    e.preventDefault();
+    $('#ajax_loader').show();
+
+    $.ajax({
+        type: "POST",
+        url: "/",
+        data: tweet,
+        success: function(response){
+          // alert("success");
+          $('#tweets').html(response);
+          // actually default is disabled-false
+            $('#newtweetbutton').attr('disabled',false);
+        },
+        error: function(){
+          alert("Error");
+        },
+        complete: function(){
+          $('#ajax_loader').hide();
+           $('#newtweetbutton').attr('disabled',false);
+        }
+    });
+
+  });
+});
+</script>
