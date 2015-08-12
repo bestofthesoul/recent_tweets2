@@ -21,7 +21,8 @@
 <script>
 $(document).ready(function() {
   $('#new_tweet').submit(function(e){
-    
+    // When loading, off the button, disable it
+    $('#newtweetbutton').attr('disabled',true);
     var tweet = $("#new_tweet").serialize();
     e.preventDefault();
     $('#ajax_loader').show();
@@ -33,7 +34,6 @@ $(document).ready(function() {
         success: function(response){
           // alert("success");
           $('#tweets').html(response);
-          // actually default is disabled-false
             $('#newtweetbutton').attr('disabled',false);
         },
         error: function(){
